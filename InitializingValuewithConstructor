@@ -1,0 +1,41 @@
+import java.util.*;
+public class Main{
+	public static void main(String[] args) {
+		Scanner scanner=new Scanner(System.in);
+		
+        int num=scanner.nextInt();
+        
+		Arr arr[]=new Arr[num];
+		
+		scanner.nextLine();
+		
+		for(int i=0;i<num;i++){
+			System.out.println("Enter the name: ");
+			String temp1=scanner.nextLine();
+			System.out.println("Enter the marks: ");
+			int temp2=scanner.nextInt();
+			scanner.nextLine();
+
+
+			arr[i]=new Arr(temp1,temp2);
+
+		}
+		for(Arr h:arr){
+		    System.out.println("Name :"+h.name+" Marks :"+h.marks);
+		}
+	}
+        
+        
+}
+
+class Arr{
+	String name;
+	int marks;
+
+	public Arr(String s,int a){
+		name=s;
+		marks=a;
+	}
+
+	
+}
