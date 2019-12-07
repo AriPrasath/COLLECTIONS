@@ -1,0 +1,42 @@
+import java.util.*;
+
+class Student implements Comparable<Student>{
+    String name;
+    double cgpa;
+    public Student(String name,double cgpa){
+        this.name=name;
+        this.cgpa=cgpa;
+    }
+    
+    public int compareTo(Student s){
+        return (int)s.cgpa-(int)this.cgpa;
+    }
+    
+}
+
+
+public class Main
+{
+	public static void main(String[] args) {
+		ArrayList<Student> arr=new ArrayList<Student>();
+		
+		Student s1=new Student("Bassam",10.0);
+		Student s2=new Student("Paulson",9.8);
+		Student s3=new Student("Naren",9.0);
+		Student s4=new Student("Mukesh",11.0);
+		
+	    arr.add(s1);
+	    arr.add(s2);
+	    arr.add(s3);
+	    arr.add(s4);
+	    
+	    Collections.sort(arr);
+	    
+	    Iterator<Student> itr=arr.iterator();
+	    
+	    while(itr.hasNext()){
+	        Student temp=itr.next();
+	        System.out.println("Name : "+temp.name+" , CGPA : "+temp.cgpa);
+	    }
+	}
+}
