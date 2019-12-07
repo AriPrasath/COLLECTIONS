@@ -1,0 +1,78 @@
+import java.util.*;
+
+class Student {
+    String name;
+    double cgpa;
+    public Student(String name,double cgpa){
+        this.name=name;
+        this.cgpa=cgpa;
+    }
+}
+
+class SortByCgpa implements Comparator<Student>{
+    public int compare(Student s1,Student s2){
+        return (int)s1.cgpa-(int)s2.cgpa;
+    }
+}
+
+class SortByRevCgpa implements Comparator<Student>{
+    public int compare(Student s1,Student s2){
+        return (int)s2.cgpa-(int)s1.cgpa;
+    }
+}
+
+class SortByName implements Comparator<Student>{
+    public int compare(Student s1,Student s2){
+        return s1.name.compareTo(s2.name);
+    }
+}
+
+
+class SortByRevName implements Comparator<Student>{
+    public int compare(Student s1,Student s2){
+        return s2.name.compareTo(s1.name);
+    }
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner scanner=new Scanner(System.in);
+		ArrayList<Student> arr=new ArrayList<Student>();
+		
+		System.out.println("Enter the Number of inputs : ");
+		int num=scanner.nextInt();
+		
+		for(int i=0;i<num;i++){
+		    scanner.nextLine();
+		    System.out.print("Name : ");
+		    String name=scanner.nextLine();
+		    
+		    System.out.print("CGPA : ");
+		    double cgpa=scanner.nextDouble();
+		    System.out.println();
+		    
+		    arr.add(new Student(name,cgpa));
+		}
+		
+	    System.out.println("1.Asscending Order CGPA \n2.Descending Order CGPA\n3.Asscending Order Name\n4.Descending Order name\nEnter by which you want to display: ");
+	    int temp1=scanner.nextInt();
+	    
+	    switch(temp1){
+	        case 1:Collections.sort(arr,new SortByCgpa());break;
+	        case 2:Collections.sort(arr,new SortByRevCgpa());break;
+	        case 3:Collections.sort(arr,new SortByName());break;
+	        case 4:Collections.sort(arr,new SortByRevName());break;
+	        default:System.out.println("Error");
+	    }
+	    
+	    
+	    
+	    Iterator<Student> itr=arr.iterator();
+	    
+	    while(itr.hasNext()){
+	        Student temp=itr.next();
+	        System.out.println("Name : "+temp.name+" , CGPA : "+temp.cgpa);
+	    }
+	}
+}
