@@ -1,0 +1,101 @@
+import java.util.*;
+class sortByValue implements Comparator<Map.Entry<String,Integer>>{
+    public int  compare(Map.Entry<String,Integer> e1,Map.Entry<String,Integer> e2){
+        int num1=e1.getValue();
+        int num2=e2.getValue();
+        return (int)num1-num2;
+    }
+}
+
+
+class sortByKey implements Comparator<Map.Entry<String,Integer>>{
+    public int  compare(Map.Entry<String,Integer> e1,Map.Entry<String,Integer> e2){
+        String num1=e1.getKey();
+        String num2=e2.getKey();
+        return (int)num1.compareTo(num2);
+    }
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner scanner=new Scanner(System.in);
+	    HashMap<String,Integer> hm=new HashMap<String,Integer>();
+	    System.out.println("Enter the No of inputs : ");
+	    int num=scanner.nextInt();
+	    
+	    for(int i=0;i<num;i++){
+	        scanner.nextLine();
+	        System.out.println("Enter the Name");
+	        String name=scanner.nextLine();
+	        System.out.println("Enter the Age");
+	        int age=scanner.nextInt();
+	        hm.put(name,age);
+	    }
+	    
+	    //sort by key Using Tree map
+	    System.out.println("Sorted using TreeMap........");
+	    
+	    TreeMap<String,Integer> m=new TreeMap<String,Integer>();
+	    m.putAll(hm);
+	    
+	    for(Map.Entry<String,Integer> en :  m.entrySet()){
+	        System.out.println("Key : "+en.getKey()+"\nValue : "+en.getValue());
+	    }
+	    System.out.println(".....................*********....................");
+	    
+	    List<Map.Entry<String,Integer>> a=new ArrayList<Map.Entry<String,Integer>>(hm.entrySet());
+	    
+	    //Sort by value using comparator class using ArrayList
+	    
+	    System.out.println("1.Sort By Value \n2.Sort By Key \nEnter the option: ");
+	    int top=scanner.nextInt();
+	    
+	    LinkedHashMap<String,Integer> um=new LinkedHashMap<String,Integer>();
+	    
+	    
+	    switch(top){
+	        case 1:
+	            System.out.println("Sort by Value using Comparator........");
+	            Collections.sort(a,new sortByValue());
+	    
+        	    
+        	    
+        	    //Assigning value to linked hashmap from ArrayList
+        	    
+        	    for(Map.Entry<String,Integer> temp: a){
+        	        um.put(temp.getKey(),temp.getValue());
+        	    }
+        	    
+        	    //Iterating through Linked hashmap
+        	    
+        	    for(Map.Entry<String,Integer> k :  um.entrySet()){
+        	        System.out.println("Key : "+k.getKey()+"\nValue : "+k.getValue());
+        	    }
+        	    System.out.println(".....................*********....................");
+        	    break;
+        	    
+            case 2:
+                System.out.println("Sort by Key using Comparator........");
+                Collections.sort(a,new sortByKey());
+	    
+        	    
+        	    
+        	    //Assigning value to linked hashmap from ArrayList
+        	    
+        	    for(Map.Entry<String,Integer> temp: a){
+        	        um.put(temp.getKey(),temp.getValue());
+        	    }
+        	    
+        	    //Iterating through Linked hashmap
+        	    
+        	    for(Map.Entry<String,Integer> k :  um.entrySet()){
+        	        System.out.println("Key : "+k.getKey()+"\nValue : "+k.getValue());
+        	    }
+        	    System.out.println(".....................*********....................");
+        	    break;
+        	default:
+        	    break;
+	    }
+	}
+}
