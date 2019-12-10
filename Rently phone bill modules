@@ -1,0 +1,133 @@
+import java.util.*;
+
+class Callrecord{
+    int totalduration,totalvalue;
+    public Callrecord(int totalduration,int totalvalue){
+        this.totalvalue= totalvalue;
+        this.totalduration= totalduration;
+    }
+    
+    public int getDuration(){
+        return this.totalduration;
+    }
+    
+    public int getvalue(){
+        return this.totalvalue;
+    }
+    
+    public void setDuration(int duration){
+        this.totalduration=duration;
+    }
+    
+    public void setValue(int value){
+        this.totalvalue=value;
+    }
+}
+
+
+class SortByValue {
+    public int compare(int e1 ,int e2){
+        if(e1-e2>0){
+            return 1;
+        }else{
+            return 0;
+        }
+        
+    }
+}
+
+
+
+
+public class Main
+{
+    public static HashMap<Integer,Callrecord> hm=new HashMap<>();
+    
+    public static void Calculation(String[] uniquerecord){
+        int hours,mins,secs,phonenum;
+		
+		for(int i=0;i<uniquerecord.length;i++){
+
+		    hours=Integer.parseInt(uniquerecord[i].substring(0,2));
+		    mins=Integer.parseInt(uniquerecord[i].substring(3,5));
+		    secs=Integer.parseInt(uniquerecord[i].substring(6,8));
+		    phonenum=Integer.parseInt(uniquerecord[i].substring(9,20).replace("-",""));
+		    
+		    int value=0;
+		    
+    	    if(hours==0 && mins<=4){
+    	        value=((mins*60)+secs)*3;
+    	    }
+    	    else{
+    	       value=((hours*60)+mins)*150;
+    	       if(secs>0){
+    	           value+=150;
+    	       }
+    	    } 
+		    
+		    int duration=(hours*60*60)+(mins*60)+secs;
+		    
+		    if(hm.containsKey(phonenum)){
+		        int tempvalue=hm.get(phonenum).getvalue();
+		        int tempduration=hm.get(phonenum).getDuration();
+		        tempvalue+=value;
+		        tempduration+=duration;
+		        hm.get(phonenum).setValue(tempvalue);
+		        hm.get(phonenum).setDuration(tempduration);
+		    }
+		    else{
+		        hm.put(phonenum,new Callrecord(duration,value));
+		    }
+		}
+    }
+    
+    
+    public static int Offer(){
+        int max=-1;
+		int maxphone=0;
+		Iterator itr1=hm.entrySet().iterator();
+		int totalbill=0;
+		while(itr1.hasNext()){
+		    Map.Entry<Integer,Callrecord> temphm=(Map.Entry)itr1.next();
+		    totalbill+=temphm.getValue().getvalue();
+		    int key=temphm.getKey();
+		    int dur=temphm.getValue().getDuration();
+		    int sec=temphm.getValue().getvalue();
+		    
+		    if(dur>max){
+		        max=dur;
+		        maxphone=key;
+		    }
+		    if(dur==max){
+		        SortByValue s=new SortByValue();
+		        int comp=s.compare(maxphone,key);
+		        if(comp==1){
+		            max=dur;
+		            maxphone=key;
+		            
+		        }
+		    }
+		}
+		
+		if(hm.containsKey(maxphone)){
+		    totalbill-=(hm.get(maxphone).getvalue());
+		}
+		return totalbill;
+    } 
+    
+    
+	public static void main(String[] args) {
+		Scanner scanner=new Scanner(System.in);
+		
+		String record=scanner.nextLine();
+		
+		String[] uniquerecord=record.split(" ");
+
+		Calculation(uniquerecord);
+		
+		int totalbill=Offer();
+		
+		System.out.println(totalbill);
+		
+	}
+}
