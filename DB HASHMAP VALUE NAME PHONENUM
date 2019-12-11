@@ -1,0 +1,112 @@
+import java.util.*;
+class Save{
+    String num1;
+    String num2;
+    
+    public Save(String numm1,String numm2){
+        this.num1=numm1;
+        this.num2=numm2;
+    }
+    
+    public String getnum1(){
+        return this.num1;
+    }
+    
+    public String getnum2(){
+        return this.num2;
+    }
+    
+}
+public class Main{
+    public static HashMap<String,Save> hm=new HashMap<>();
+
+    public static void main(String[] args){
+        Scanner scanner=new Scanner(System.in);
+        System.out.print("Enter the number of inputs : ");
+        int tc=scanner.nextInt();
+        scanner.nextLine();
+        for(int i=0;i<tc;i++){
+           
+            System.out.println("Enter the Name : ");
+            String name=scanner.nextLine().toLowerCase();
+            
+            System.out.println("Enter the Number 1 : ");
+            String num1=scanner.nextLine();
+            
+            System.out.println("Enter the Number 2 : ");
+            String num2=scanner.nextLine();
+            
+            //System.out.println(name+" "+num1+" "+num2);
+            
+            hm.put(name,new Save(num1,num2));
+        }
+        
+        System.out.println("1.Display\n2.SearchByName\n");
+        int choice=scanner.nextInt();
+        switch(choice){
+            case 1:
+                System.out.println("1");
+                Iterator itr1=hm.entrySet().iterator();
+                
+                while(itr1.hasNext()){
+                    Map.Entry<String,Save> m=(Map.Entry) itr1.next();
+                    
+                    String tempname=m.getKey();
+                    String tempnum1=m.getValue().getnum1();
+                    String tempnum2=m.getValue().getnum2();
+                    int flag=0;
+                    System.out.print(tempname+" ");
+                    if(!tempnum1.equals("NULL")){
+                        System.out.print("Num1 : "+tempnum1+"   ");
+                        flag=1;
+                    }
+                    if(!tempnum2.equals("NULL")){
+                        System.out.print("Num2 : "+tempnum2+"   ");
+                        flag=1;
+                    }
+                    if(flag==0){
+                        System.out.print("No phone num available   ");
+                    }
+                    System.out.println();
+                        
+                    
+                }
+                break;
+            case 2:
+                System.out.println("2");
+                System.out.println("Enter the name : ");
+                scanner.nextLine();
+                String temp=scanner.nextLine();
+                Iterator itr=hm.entrySet().iterator();
+                
+                while(itr.hasNext()){
+                    Map.Entry<String,Save> m=(Map.Entry) itr.next();
+                    
+                    String tempname=m.getKey();
+                    String tempnum1=m.getValue().getnum1();
+                    String tempnum2=m.getValue().getnum2();
+                    if(tempname.contains(temp.toLowerCase())){
+                        
+                        int flag=0;
+                        System.out.print("Name : "+tempname+"   ");
+                        if(!tempnum1.equalsIgnoreCase("NULL")){
+                            System.out.print("Num1 : "+tempnum1+"   ");
+                            flag=1;
+                        }
+                        if(!tempnum2.equalsIgnoreCase("NULL")){
+                            System.out.print("Num2 : "+tempnum2+"   ");
+                            flag=1;
+                        }
+                        if(flag==0){
+                            System.out.print("No phone num available   ");
+                        }
+                        System.out.println();
+                        
+                    }
+                }
+                break;
+            default:break;
+            
+        }
+    }
+}
