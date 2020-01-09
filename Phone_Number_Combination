@@ -1,0 +1,82 @@
+package javaclassassignment;
+
+import java.util.*;
+
+class Number_combination{
+    public static void main(String[] args){
+        Scanner scanner=new Scanner(System.in);
+        
+        
+
+        char[] num2= {'a','b','c'};
+        char[] num3= {'d','e','f'};
+        char[] num4= {'g','h','i'};
+        char[] num5= {'j','k','l'};
+        char[] num6= {'m','n','o'};
+        char[] num7= {'p','q','r','s'};
+        char[] num8= {'t','u','v'};
+        char[] num9= {'w','x','y','z'};
+        
+        
+        String find=scanner.next();
+        char arr1[]=find.toCharArray();
+        
+        ArrayList<String> a=new ArrayList<String>();
+        ArrayList<String> finala=new ArrayList<String>();
+        
+        int n=find.length();
+        int t=0;
+        
+        for(int i=0;i<n;i++) {
+        	finala.clear();
+        	char arr[]=new char[10];
+        	int num=0;
+       
+        	if(arr1[i]=='2') {
+        		arr=num2;
+        		num=num2.length;
+        	}else if(arr1[i]=='3') {
+        		arr=num3;
+        		num=num3.length;
+        	}else if(arr1[i]=='4') {
+        		arr=num4;
+        		num=num4.length;
+        	}else if(arr1[i]=='5') {
+        		arr=num5;
+        		num=num5.length;
+        	}else if(arr1[i]=='6') {
+        		arr=num6;
+        		num=num6.length;
+        	}else if(arr1[i]=='7') {
+        		arr=num7;
+        		num=num7.length;
+        	}else if(arr1[i]=='8') {
+        		arr=num8;
+        		num=num8.length;
+        	}
+        	for(int j=0;j<num;j++) {
+        		int flag=0;
+        		Iterator<String> itr=a.iterator();
+        		while(itr.hasNext()) {
+        			flag=1;
+        			String temp=itr.next();
+        			String temp1=Character.toString(arr[j]);
+        			temp+=temp1;
+        			finala.add(temp);
+        		}
+        		if(flag==0) {
+        			String temp1=Character.toString(arr[j]);
+        			finala.add(temp1);
+        		}
+        	}t=i*10;
+        	a.clear();
+        	a.addAll(finala);
+        }
+        
+        Iterator<String> itr1=finala.iterator();
+        while(itr1.hasNext()) {
+        	String temp2=itr1.next();
+        	System.out.println(temp2);
+        }
+    }
+}
