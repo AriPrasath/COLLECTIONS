@@ -2,7 +2,7 @@ package javaclassassignment;
 
 import java.util.*;
 
-class Number_combination{
+class String_combination{
     public static void main(String[] args){
         Scanner scanner=new Scanner(System.in);
         
