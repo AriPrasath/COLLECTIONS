@@ -1,0 +1,53 @@
+
+package javaclassassignment;
+
+import java.util.*;
+
+class Number_combination{
+    public static void main(String[] args){
+        Scanner scanner=new Scanner(System.in);
+        int num=scanner.nextInt();
+        int arr[]=new int[num];
+        for(int i=0;i<num;i++) {
+        	arr[i]=scanner.nextInt();
+        }
+        int n=scanner.nextInt();
+        int max=scanner.nextInt();
+        
+        ArrayList<String> a=new ArrayList<String>();
+        ArrayList<String> finala=new ArrayList<String>();
+        
+        int t=0;
+        
+        for(int i=0;i<n;i++) {
+        	finala.clear();
+        	for(int j=0;j<num;j++) {
+        		int flag=0;
+        		Iterator<String> itr=a.iterator();
+        		while(itr.hasNext()) {
+        			flag=1;
+        			String temp=itr.next();
+        			String temp1=Integer.toString(arr[j]);
+        			temp+=temp1;
+        			finala.add(temp);
+        		}
+        		if(flag==0) {
+        			String temp1=Integer.toString(arr[j]);
+        			finala.add(temp1);
+        		}
+        	}t=i*10;
+        	a.clear();
+        	a.addAll(finala);
+        }
+        int count=0;
+        Iterator<String> itr1=finala.iterator();
+        while(itr1.hasNext()) {
+        	String temp2=itr1.next();
+        	int temp3=Integer.parseInt(temp2);
+        	if(temp3<max && temp3>=t) {
+        		count++;
+        	}
+        }
+        System.out.println(count);
+    }
+}
