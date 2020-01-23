@@ -1,0 +1,82 @@
+import java.util.*;
+
+public class War
+{
+    
+    public static String war="";
+    
+    static int east=0;
+    static int west=0;
+    static int north=0;
+    static int south=0;
+    static int success=0;
+    
+    public static void main(String []args){
+        Scanner scanner=new Scanner(System.in);
+        war=scanner.nextLine();
+        int succ_attack=DayAttack();
+        System.out.println(succ_attack);
+        
+    }
+    
+    static int DayAttack(){
+        String day_wise[]=war.split(";");
+        
+        
+        for(String day:day_wise){
+            //System.out.println(day);
+            int e=0,w=0,n=0,s=0;
+            String attempt_wise[]=day.split("T");
+            
+            for(int Attloop=1;Attloop<attempt_wise.length;Attloop++){
+                attempt_wise[Attloop]=attempt_wise[Attloop].replace(":","");
+                attempt_wise[Attloop]=attempt_wise[Attloop].replace(" ","");
+                //System.out.println(attempt_wise[Attloop]+"-----------");
+                
+                String alp=(attempt_wise[Attloop]);
+                
+                
+                //System.out.println("East: "+east+" West: "+west+" North:"+north+ " South:"+south);
+                //System.out.println(alp.substring(6,alp.length()));
+                
+                if(alp.contains("N") && Integer.parseInt(alp.substring(6,alp.length()))>north){
+                    if(n<Integer.parseInt(alp.substring(6,alp.length()))){
+                      n=Integer.parseInt(alp.substring(6,alp.length()));
+                    }
+                    //System.out.println(n); 
+                    success++;
+                }
+                if(alp.contains("E") && Integer.parseInt(alp.substring(6,alp.length()))>east){
+                    if(e<Integer.parseInt(alp.substring(6,alp.length()))){
+                        e=Integer.parseInt(alp.substring(6,alp.length()));
+                    }
+                    //System.out.println(e+"*****");
+                    success++;
+                }
+                if(alp.contains("W") && Integer.parseInt(alp.substring(6,alp.length()))>west){
+                    if(w<Integer.parseInt(alp.substring(6,alp.length()))){
+                    w=Integer.parseInt(alp.substring(6,alp.length()));
+                    }
+                    //System.out.println(w);
+                    success++;
+                }
+                if(alp.contains("S") && Integer.parseInt(alp.substring(6,alp.length()))>south){
+                    if(n<Integer.parseInt(alp.substring(6,alp.length()))){
+                        s=Integer.parseInt(alp.substring(6,alp.length()));
+                    }
+                    //System.out.println(s);
+                    success++;
+                }
+                    
+                
+            }
+                
+            east+=e;
+            west+=w;
+            north+=n;
+            south+=s;
+        }
+        return success;
+    }
+    
+}
